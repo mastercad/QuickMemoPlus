@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.byte_artist.quickmemoplus.activity.MainActivity" >
+
+    <group android:id="@+id/group_memo_list"
+        android:orderInCategory="101">
+
+        <item android:id="@+id/menu_all_memos"
+            android:orderInCategory="0"
+            android:icon="@drawable/common_google_signin_btn_text_light"
+            android:title="@string/menu_all_memos" />
+
+    </group>
+
+    <item android:id="@+id/menu_add_group"
+        android:orderInCategory="111"
+        android:title="@string/menu_add_group"/>
+
+    <item android:id="@+id/menu_memo_trash"
+        android:orderInCategory="121"
+        android:title="@string/menu_memo_trash" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="131"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+
+</menu>

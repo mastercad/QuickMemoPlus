@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuickMemo+</string>
+    <string name="action_settings">Settings</string>
+    <string name="memo_group_default">My Group</string>
+    <string name="menu_all_memos">All Memos</string>
+    <string name="menu_memo_trash">Trash</string>
+    <string name="menu_add_group">Add new Group</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="uri">Uri</string>
+    <string name="name">Name</string>
+    <string name="btn_insert_checkbox">Insert todo</string>
+    <string name="btn_insert_link">Insert link</string>
+    <string name="btn_insert_image">Insert image</string>
+    <string name="btn_insert_block_quote">insert block quote</string>
+    <string name="btn_create_numbered_list">Create numbered list</string>
+    <string name="btn_create_bullet_list">Create bullet list</string>
+    <string name="btn_align_right">Align text right</string>
+    <string name="btn_align_center">Align text center</string>
+    <string name="btn_align_left">Align text left</string>
+    <string name="btn_decrease_intend">Decrease Intend</string>
+    <string name="btn_increase_intend">Increase Intend</string>
+    <string name="btn_set_text_background_color">Set text background color</string>
+    <string name="btn_set_text_color">Set text color</string>
+    <string name="btn_insert_heading_6">Insert level 6 heading</string>
+    <string name="btn_insert_heading_5">Insert level 5 heading</string>
+    <string name="btn_insert_heading_4">Insert level 4 heading</string>
+    <string name="btn_insert_heading_3">Insert level 3 heading</string>
+    <string name="btn_insert_heading_2">Insert level 2 heading</string>
+    <string name="btn_insert_heading_1">Insert level 1 heading</string>
+    <string name="btn_underline_text">Underline text</string>
+    <string name="btn_line">Insert horizontal line</string>
+    <string name="btn_strikethrough_text">Striketrough text</string>
+    <string name="btn_superscripe_text">Superscripe text</string>
+    <string name="btn_subscript_text">Subscript text</string>
+    <string name="btn_set_text_italic">Set text italic</string>
+    <string name="btn_set_text_bold">Set text bold</string>
+    <string name="btn_remove_formats_from_selection">Remove all formats from selection</string>
+    <string name="btn_redo">Redo</string>
+    <string name="btn_undo">Undo</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_ok">OK</string>
+</resources>

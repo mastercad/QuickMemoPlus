@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">QuickMemo+</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="memo_group_default">Meine Gruppe</string>
+    <string name="menu_all_memos">Alle Notizen</string>
+    <string name="menu_memo_trash">Papierkorb</string>
+    <string name="menu_add_group">Gruppe anlegen</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="uri">Uri</string>
+    <string name="name">Name</string>
+    <string name="btn_insert_checkbox">Todo einfügen</string>
+    <string name="btn_insert_link">Link einfügen</string>
+    <string name="btn_insert_image">Bild einfügen</string>
+    <string name="btn_insert_block_quote">Zitat einfügen</string>
+    <string name="btn_create_numbered_list">Nummerierte Liste erstellen</string>
+    <string name="btn_create_bullet_list">Aufzählung einfügen</string>
+    <string name="btn_align_right">Text Rechts ausrichten</string>
+    <string name="btn_align_center">Text zentriert ausrichten</string>
+    <string name="btn_align_left">Text links ausrichten</string>
+    <string name="btn_decrease_intend">Einrückung verringern</string>
+    <string name="btn_increase_intend">Einrückung erhöhen</string>
+    <string name="btn_set_text_background_color">Texthintergrundfarbe setzen</string>
+    <string name="btn_set_text_color">Textfarbe setzen</string>
+    <string name="btn_insert_heading_6">Überschrift 6 einfügen</string>
+    <string name="btn_insert_heading_5">Überschrift 5 einfügen</string>
+    <string name="btn_insert_heading_4">Überschrift 4 einfügen</string>
+    <string name="btn_insert_heading_3">Überschrift 3 einfügen</string>
+    <string name="btn_insert_heading_2">Überschrift 2 einfügen</string>
+    <string name="btn_insert_heading_1">Überschrift 1 einfügen</string>
+    <string name="btn_underline_text">Text unterstreichen</string>
+    <string name="btn_line">Horizontale Linie einfügen</string>
+    <string name="btn_strikethrough_text">Text durchstreichen</string>
+    <string name="btn_superscripe_text">Text hochstellen</string>
+    <string name="btn_subscript_text">Text tiefstellen</string>
+    <string name="btn_set_text_italic">Text schräg stellen</string>
+    <string name="btn_set_text_bold">Text fett markieren</string>
+    <string name="btn_remove_formats_from_selection">Alle Formatierungen von Auswahl entfernen</string>
+    <string name="btn_redo">Wiederholen</string>
+    <string name="btn_undo">Rückgängig</string>
+    <string name="btn_cancel">Abbrechen</string>
+    <string name="btn_ok">OK</string>
+</resources>
