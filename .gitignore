@@ -66,6 +66,7 @@ captures/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 .cxx/
+app/.cxx
 
 # Google Services (e.g. APIs or Firebase)
 # google-services.json
@@ -94,4 +95,4 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
-/android-upload-keystore.jks
+keystore.jks
