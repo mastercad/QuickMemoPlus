@@ -6,9 +6,10 @@
     <group android:id="@+id/group_memo_list"
         android:orderInCategory="101">
 
-        <item android:id="@+id/menu_all_memos"
+        <item
+            android:id="@+id/menu_all_memos"
+            android:icon="@mipmap/ic_launcher"
             android:orderInCategory="0"
-            android:icon="@drawable/common_google_signin_btn_text_light"
             android:title="@string/menu_all_memos" />
 
     </group>
