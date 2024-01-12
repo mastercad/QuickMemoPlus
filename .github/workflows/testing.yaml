@@ -44,7 +44,7 @@ jobs:
           cache: gradle
 
       - name: Android lint
-        run: ./gradlew lint
+        run: ./gradlew lint --stacktrace
 
       - uses: yutailang0119/action-android-lint@v3
         with:
@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: linter-results
-          path: app/build/reports/lint-results-release.html
+          path: build/reports/*.xml
 
       - name: Run all checks
         run: ./gradlew check
