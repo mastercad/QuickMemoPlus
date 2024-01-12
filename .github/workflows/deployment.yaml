@@ -31,8 +31,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-        echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
-        gpg -d --passpharse "${{ secrets.RELEASE_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > app/keystore.jks
+          echo "${{ secrets.RELEASE_KEYSTORE }}" > release.keystore.asc
+          gpg -d --passpharse "${{ secrets.RELEASE_KEYSTORE_PASSPHRASE }}" --batch release.keystore.asc > app/keystore.jks
 
   releaseBuild:
     needs: test
