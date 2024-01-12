@@ -23,7 +23,7 @@ jobs:
 
   test:
     name: Lint Check and Testing
-    runs-on: ubuntu-latest
+    runs-on: macOS-latest
 
     strategy:
       matrix:
