@@ -44,18 +44,27 @@ jobs:
           cache: gradle
 
       - name: Android lint
-        run: ./gradlew lint --stacktrace
+        run: ./gradlew lintRelease --stacktrace
 
       - uses: yutailang0119/action-android-lint@v3
         with:
           report-path: build/reports/*.xml # Support glob patterns by https://www.npmjs.com/package/@actions/glob
         continue-on-error: false # If annotations contain error of severity, action-android-lint exit 1.
 
+      #  /home/runner/work/quick-memo-plus/build/app/reports/lint-result-debug.html
+      #  /home/runner/work/quick-memo-plus/quick-memo-plus/build/reports/*.xml
+
+      - run: ls -lisa ./
+
+      - run: ls -lisa ../
+
+      - run: ls -lisa build/
+
       - name: Upload Linter results
         uses: actions/upload-artifact@v1
         with:
           name: linter-results
-          path: build/reports/*.xml
+          path: ../build/app/reports/lint-results-release.html
 
       - name: Run all checks
         run: ./gradlew check
