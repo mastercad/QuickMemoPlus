@@ -75,14 +75,14 @@ jobs:
 #          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
 #          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
 
-#      - uses: actions/cache@v2
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-#          restore-keys: |
-#            ${{ runner.os }}-${{ github.job }}-
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ github.job }}-
 
 #      - uses: actions/cache@v2
 #        id: avd-cache
@@ -101,7 +101,9 @@ jobs:
 #          force-avd-creation: false
 #          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
 #          emulator-build: 6609375
-          script: ./gradlew connectedAndroidTest --stacktrace
+          target: default
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+          script: ./gradlew connectedDebugAndroidTest --stacktrace
 
       - name: Upload Unit tests results
         uses: actions/upload-artifact@v1
