@@ -103,7 +103,7 @@ jobs:
 #          emulator-build: 6609375
           target: default
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          script: ./gradlew connectedDebugAndroidTest --stacktrace
+          script: ./gradlew connectedCheck --stacktrace
 
       - name: Upload Unit tests results
         uses: actions/upload-artifact@v1
