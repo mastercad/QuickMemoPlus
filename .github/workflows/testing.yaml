@@ -44,14 +44,14 @@ jobs:
 #            target: [default, google_apis]
 
     steps:
-      - name: debug environment
-        run: | 
-          echo $ANDROID_HOME
-          echo $ANDROID_SDK_ROOT
-          echo $GITHUB_PATH
-          echo $GITHUB_ENV
-          ls -lisa $ANDROID_HOME
-          ls -lisa $ANDROID_SDK_PATH
+#      - name: debug environment
+#        run: |
+#          echo $ANDROID_HOME
+#          echo $ANDROID_SDK_ROOT
+#          echo $GITHUB_PATH
+#          echo $GITHUB_ENV
+#          ls -lisa $ANDROID_HOME
+#          ls -lisa $ANDROID_SDK_PATH
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -65,7 +65,10 @@ jobs:
           java-version: 18
           cache: gradle
 
-#      - name: Add Android SDK to path
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      #      - name: Add Android SDK to path
 #        run: |
 #          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
 #          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
@@ -143,6 +146,6 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
 #          emulator-build: 6609375
-          emulator-build: 6110076
+#          emulator-build: 6110076
 #          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedAndroidTest
