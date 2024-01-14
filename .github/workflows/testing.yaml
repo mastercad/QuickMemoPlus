@@ -89,7 +89,7 @@ jobs:
 #            ~/.android/adb*
 #          key: avd
 
-      - ame: Android lint
+      - name: Android lint
         run: ./gradlew lintRelease
 
       - uses: yutailang0119/action-android-lint@v3
