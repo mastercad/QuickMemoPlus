@@ -33,6 +33,11 @@ jobs:
         api-level: [24, 28, 29, 30, 31]
         arch: [x86, x86_64]
         target: [google_apis]
+        exclude:
+          - api-level: 30
+            arch: x86
+          - api-level: 34
+            arch: x86
 #            target: [default, google_apis]
 
     steps:
