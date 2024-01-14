@@ -43,6 +43,14 @@ jobs:
           java-version: 18
           cache: gradle
 
+      - name: Cache Gradle and wrapper
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+
       - name: Android lint
         run: ./gradlew lintRelease
 
