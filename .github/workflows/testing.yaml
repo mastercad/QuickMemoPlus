@@ -63,27 +63,6 @@ jobs:
       - name: Run Tests
         run: bash ./gradlew test
 
-#      - name: AVD cache
-#        uses: actions/cache@v3
-#        id: avd-cache
-#        with:
-#          path: |
-#            ~/.android/avd/*
-#            ~/.android/adb*
-#          key: avd-${{ matrix.api-level }}
-
-#      - name: create AVD and generate snapshot for caching
-#        if: steps.avd-cache.outputs.cache-hit != 'true'
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: ${{ matrix.api-level }}
-#          target: ${{ matrix.target }}
-#          arch: ${{ matrix.arch }}
-#          force-avd-creation: false
-#          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-#          disable-animations: false
-#          script: echo "Generated AVD snapshot for caching."
-
       - name: Run Android instrumented tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -93,3 +72,51 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: ./gradlew connectedAndroidTest
+
+
+###########################################################################################################
+
+      - name: Decode Keystore
+        env:
+          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+
+        run: |
+          echo $ENCODED_STRING > keystore-b64.txt
+          base64 -d keystore-b64.txt > $SIGNING_KEY_STORE_PATH
+          
+      #2
+      - name: Build Release apk
+        env:
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: ./gradlew assembleRelease
+
+      - name: Build Release bundle
+        env:
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: ./gradlew bundleRelease
+
+      #3
+      - name: Upload Release Build to Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-artifacts
+          path: |
+            ../build/app/outputs/apk/release/
+            ../build/app/outputs/bundle/release/
+
+      #4
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
+          prerelease: true
+          files: |
+            ../build/app/outputs/apk/release/app-release.apk
+            ../build/app/outputs/bundle/release/app-release.aab
