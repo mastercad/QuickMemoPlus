@@ -6,23 +6,9 @@ on:
       - develop
       - master
 
-#env:
-#  ANDROID_HOME: "/Users/runner/Library/android-sdk"
-#  ANDROID_SDK_TOOLS: "7583922_latest"
-
 jobs:
-#  testing:
-
-#    runs-on: macOS-latest
-#    timeout-minutes: 25
-#    env:
-#      JAVA_TOOL_OPTIONS: -Xmx4g -XX:+UseParallelGC
-#      ENABLE_APP_VERSIONING: false
-
-#    runs-on: macos-latest
 
   test:
-
     name: Lint Check and Testing
     runs-on: macOS-latest
     env:
@@ -31,25 +17,19 @@ jobs:
 
     strategy:
       matrix:
-        api-level: [24, 28, 29, 30, 31]
+        api-level: [24, 28, 29, 30, 31, 34]
         arch: [x86, x86_64]
         target: [google_apis]
         exclude:
           - api-level: 30
+            arch: x86
+          - api-level: 31
             arch: x86
           - api-level: 34
             arch: x86
 #            target: [default, google_apis]
 
     steps:
-#      - name: debug environment
-#        run: |
-#          echo $ANDROID_HOME
-#          echo $ANDROID_SDK_ROOT
-#          echo $GITHUB_PATH
-#          echo $GITHUB_ENV
-#          ls -lisa $ANDROID_HOME
-#          ls -lisa $ANDROID_SDK_PATH
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -62,32 +42,6 @@ jobs:
           distribution: zulu
           java-version: 18
           cache: gradle
-
-#      - name: Setup Android SDK
-#        uses: android-actions/setup-android@v3
-
-#      - name: Add Android SDK to path
-#        run: |
-#          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
-#          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
-#          echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
-
-#      - uses: actions/cache@v2
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-${{ github.job }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
-#          restore-keys: |
-#            ${{ runner.os }}-${{ github.job }}-
-
-#      - uses: actions/cache@v2
-#        id: avd-cache
-#        with:
-#          path: |
-#            ~/.android/avd/*
-#            ~/.android/adb*
-#          key: avd
 
       - name: Android lint
         run: ./gradlew lintRelease
@@ -136,11 +90,6 @@ jobs:
           api-level: ${{ matrix.api-level }}
           target: ${{ matrix.target }}
           arch: ${{ matrix.arch }}
-#          arch: x86
-#          profile: Nexus 5X
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-#          emulator-build: 6609375
-#          emulator-build: 6110076
-#          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedAndroidTest
