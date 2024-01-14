@@ -128,6 +128,4 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
 #          emulator-build: 6609375
 #          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          script: ./gradlew connectedAndroidTest mergeAndroidReports --continue
-
-      - run: ls -lisa build/
+          script: ./gradlew connectedAndroidTest
