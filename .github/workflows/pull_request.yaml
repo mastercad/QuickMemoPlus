@@ -1,0 +1,12 @@
+name: Quality Assurance for Pull Request
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - master
+
+jobs:
+
+  test:
+    uses: ./.github/workflows/testing.yaml
