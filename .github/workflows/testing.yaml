@@ -1,10 +1,7 @@
-name: Testing Workflow
+name: Quality Assurance Workflow
 
 on:
-  pull_request:
-    branches:
-      - develop
-      - master
+  workflow_call:
 
 jobs:
 
@@ -72,92 +69,3 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: ./gradlew connectedAndroidTest
-
-
-###########################################################################################################
-
-  release:
-    name: Release Application
-#    needs: test
-    runs-on: macOS-latest
-    env:
-      JAVA_TOOL_OPTIONS: -Xmx4g -XX:+UseParallelGC
-      ENABLE_APP_VERSIONING: false
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 1
-
-      - name: Setup JDK
-        uses: actions/setup-java@v3
-        with:
-          distribution: zulu
-          java-version: 18
-          cache: gradle
-
-      - name: Decode Keystore
-        env:
-          ENCODED_STRING: ${{ secrets.RELEASE_KEYSTORE }}
-          KEY_STORE_PATH: ${{ secrets.KEY_STORE_PATH }}
-
-        run: |
-          echo $ENCODED_STRING > keystore-b64.txt
-          base64 -d keystore-b64.txt > $KEY_STORE_PATH
-          
-      #2
-      - name: Build Release apk
-        env:
-          SIGNING_KEY_STORE_PATH: ${{ secrets.KEY_STORE_PATH }}
-          SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-        run: ./gradlew assembleRelease
-
-      - name: Build Release bundle
-        env:
-          SIGNING_KEY_STORE_PATH: ${{ secrets.KEY_STORE_PATH }}
-          SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-        run: ./gradlew bundleRelease
-
-      - name: debug current folder structure
-        run: |
-          ls -lisa ../
-          ls -lisa ./
-          ls -lisa app/
-
-      - name: Hole die builds Heim ins Reich
-        run: |
-          mv ../build ./app/
-
-      - name: debug current folder structure
-        run: |
-          ls -lisa ./
-          ls -lisa app/
-          ls -lisa app/build/
-          ls -lisa app/build/app/
-          ls -lisa app/build/app/outputs/
-          ls -lisa app/build/app/outputs/apk/
-
-      #3
-      - name: Upload Release Build to Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: release-artifacts
-          path: |
-            ${{ github.workspace }}/app/build/app/outputs/apk/release/
-            ${{ github.workspace }}/app/build/app/outputs/bundle/release/
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
-
-      #4
-      - name: Create Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          generate_release_notes: true
-          prerelease: true
-          files: |
-            build/app/outputs/apk/release/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
