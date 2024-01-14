@@ -128,10 +128,6 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
 #          emulator-build: 6609375
 #          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-          script: ./gradlew connectedCheck --stacktrace
+          script: ./gradlew ./gradlew connectedAndroidTest mergeAndroidReports --continue
 
-      - name: Upload Unit tests results
-        uses: actions/upload-artifact@v1
-        with:
-          name: unit-tests-results
-          path: app/build/reports/lint-results-release.html
+      - run: ls -lisa build/
