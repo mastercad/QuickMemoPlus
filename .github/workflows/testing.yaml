@@ -43,14 +43,6 @@ jobs:
           java-version: 18
           cache: gradle
 
-      - name: Cache Gradle and wrapper
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-
       - name: Android lint
         run: ./gradlew lintRelease
 
@@ -110,14 +102,24 @@ jobs:
           SIGNING_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
         run: ./gradlew bundleRelease
 
+      - name: debug current folder structure
+        run: |
+          ls -lisa ../
+          ls -lisa ./
+          ls -lisa app/
+
+      - name: Hole die builds Heim ins Reich
+        run: |
+          mv ../build/app/outputs ./
+
       #3
       - name: Upload Release Build to Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: release-artifacts
           path: |
-            ../build/app/outputs/apk/release/
-            ../build/app/outputs/bundle/release/
+            build/app/outputs/apk/release/
+            build/app/outputs/bundle/release/
 
       #4
       - name: Create Github Release
@@ -126,5 +128,5 @@ jobs:
           generate_release_notes: true
           prerelease: true
           files: |
-            ../build/app/outputs/apk/release/app-release.apk
-            ../build/app/outputs/bundle/release/app-release.aab
+            build/app/outputs/apk/release/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
