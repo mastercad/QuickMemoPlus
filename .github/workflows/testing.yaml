@@ -6,6 +6,8 @@ on:
       - develop
       - master
 
+
+
 #env:
 #  ANDROID_HOME: "/Users/runner/Library/android-sdk"
 #  ANDROID_SDK_TOOLS: "7583922_latest"
@@ -22,6 +24,7 @@ jobs:
 #    runs-on: macos-latest
 
   test:
+
     name: Lint Check and Testing
     runs-on: macOS-latest
     env:
@@ -41,6 +44,15 @@ jobs:
 #            target: [default, google_apis]
 
     steps:
+      - name: debug environment
+        run: | 
+          echo $ANDROID_HOME
+          echo $ANDROID_SDK_ROOT
+          echo $GITHUB_PATH
+          echo $GITHUB_ENV
+          ls -lisa $ANDROID_HOME
+          ls -lisa $ANDROID_SDK_PATH
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
